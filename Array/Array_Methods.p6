@@ -18,13 +18,14 @@ my $n=2;
 my $pos=1;
 my @ind=0..3;
 say @rray.splice($pos,$n);# remove on $pos $n values and replace them with values that follow that two parameter
-say @rray:delete(@ind);   # delete all cell with indecies of @ind # 1 4 5 6
-say @rray:exists(@ind);   # Bool::True if all indecies of @ind have a value (can be 0 or '')
+say @rray[@ind]:delete;   # delete all cell with indecies of @ind # 1 4 5 6
+say @rray[@ind]:exists;   # Bool::True if all indecies of @ind have a value (can be 0 or '')
 
 say '-' x 18;
+@rray=17,21,34,47,58,69; # @rray is empty before
 say @rray;
-say @rray.pick([$n]);     # return $n (default is 1) randomly selected values, without duplication
-say @rray.roll([$n]);     # return $n (default is 1) randomly selected values, duplication possible (就像掷筛子)
+say @rray.pick($n);     # return $n (default is 1) randomly selected values, without duplication
+say @rray.roll($n);     # return $n (default is 1) randomly selected values, duplication possible (就像掷筛子)
 say @rray.reverse;        # all elements in reversed order
 say @rray.rotate(-$n);    # returns a list where $n times first item is taken to last position if $n is positive, if negative the other way around
 # @rray.sort($coderef); # returns a sorted list by a userdefined criteria, default is alphanumerical sorting
