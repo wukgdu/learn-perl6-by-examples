@@ -13,7 +13,7 @@ say $td.?talk;
 say $td.*talk;
 say $td.+talk;
 
-say $td.*caculate_pi;
-say $td.caculate_pi;
+say $td.*caculate_pi; # Nil
+say $td.caculate_pi;  # dies
 say $td.?caculate_pi; # Nil
 say $td.+caculate_pi; # dies
