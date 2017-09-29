@@ -11,7 +11,6 @@ my @a = slurp("README.txt").words;
 # is => is is is is is is is is is is is is is is is is
 
 my %hash = @a.classify( *.Str );
-for %hash.sort({-.value.elems}).hash.kv.[^20] -> $key, $value {
+for %hash.sort({-.value.elems})[^20] -> (:$key, :$value) {
     say $key ,"\t", $value.elems;
-
 }
