@@ -88,6 +88,7 @@ plan 24;
 }
 
 # <<== and ==>> pretending to be unshift and push, respectively
+# ==>> feed operator not yet implemented. Sorry.  2017.07
 # rakudo skip 'double-ended feeds'
 {
     my @odds = <1 3 5 7 9>;
