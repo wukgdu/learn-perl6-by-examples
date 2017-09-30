@@ -1,3 +1,5 @@
 my $str = "HAHA";
-say $str.WHAT; # Str
-say $str.^methods; # »ñÈ¡×Ö·û´®¶ÔÏóÉÏµÄËùÓĞ·½·¨
+say $str.WHAT;
+# Str
+say $str.^methods;
+# è·å–å­—ç¬¦ä¸²å¯¹è±¡ä¸Šçš„æ‰€æœ‰æ–¹æ³•
