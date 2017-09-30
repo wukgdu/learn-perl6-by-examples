@@ -17,14 +17,14 @@ sub display-board(@positions, @stats is copy, $halfstep) {
             out "  ", " " x (2 * $row-count);
         }
         # $row-count lines of pegs
-        for ($row-count...1) Z (1...$row-count) -> $spaces, $pegs {
+        for ($row-count...1) Z (1...$row-count) -> ($spaces, $pegs) {
             out "  ", " " x $spaces, ($peg xx $pegs).join(" "), " " x $spaces;
         }
         # four lines of space below
         for (1..4) {
             out "  ", " " x (2 * $row-count);
         }
-        @tmpl
+        @tmpl.map(*>>.list.flat);
     }();
 
     my $midpos = $row-count + 2;
