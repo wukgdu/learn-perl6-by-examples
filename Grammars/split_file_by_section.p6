@@ -37,7 +37,7 @@ grammar StructedText {
         <head> \s*   # 每一项有一个标题
         <line>+ \s*  # 每个标题下面有很多行
     }
-    
+
     token head     { '[' <datetime> ']' \s+ <title> }
     token datetime {  <filedate> \s+  <filetime> }
     token filedate { [\d+]+ % '/' }
@@ -57,21 +57,21 @@ class StructedText::Actions {
     method line    ($/) { $/.make: ~$/                            }
     method filedate($/) { $/.make: ~$/.subst(rx/<[:/]>/, '-', :g) }
     method head    ($/) { $/.make: ~$/.subst(rx/<[:/]>/, '-', :g) }
-    method entry   ($/) { make $<head>.ast => $<line>».made;      }
-    method TOP     ($/) { $/.make: $<entry>».ast;                 }    
+    method entry   ($/) { make $<head>.made => $<line>».made;      }
+    method TOP     ($/) { $/.make: $<entry>».made;                 }
 }
 my $actions = StructedText::Actions.new;
 my $parsed = StructedText.parsefile('sample.txt', :$actions).made;
 if $parsed {
     for @$parsed -> $e {
         my $filename = ~$e.key.match(/'[' <( <-[\[\]]>+ )> ']'/)  ~ ".txt";
-        my $fh = open $filename, :w; 
+        my $fh = open $filename, :w;
         $fh.say: ~$e.key;
         for $e.value -> $v {
             $fh.say: $v;
         }
         $fh.close;
-        say "生成文件 $filename ";       
+        say "生成文件 $filename ";
     }
-    
+
 }

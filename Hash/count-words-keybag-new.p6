@@ -13,7 +13,7 @@ my %words := Bag.new(slurp.comb(/\w+/).map(*.lc));
 # "o" => 5
 # "to" => 5
 
-for %words.pairs.sort(-*.value).map({ $_.key, $_.value }) -> $word, $count {
+for %words.pairs.sort(-*.value).map({ $_.key, $_.value }) -> ($word, $count) {
     say "$word: $count";
 }
 # .say for %words.pairs.sort(-*.value).fmt("%-15s=>%4d\n");
