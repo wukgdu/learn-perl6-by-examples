@@ -1,7 +1,7 @@
 use v6;
 
 sub all-dimensions (% (:length(:$x), :width(:$y), :depth(:$z))) {
-    sx andthen $y andthen $z andthen True
+    $x andthen $y andthen $z andthen True
 }
 
 # andthen 返回第一个未定义的值, 否则返回最后一个元素。短路操作符。

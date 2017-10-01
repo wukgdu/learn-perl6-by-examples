@@ -3,7 +3,8 @@
 # but it is intended to demonstrate the approach.
 
 # Magic toggle to Perl 6 code while parsing python:
-[min] < 1 ;""">; # Begin perl code:
+say [min] < 1 ;""">; # Begin perl code:
+# 'say' to avoid warn
 my $python;
 
 # The perl 6:

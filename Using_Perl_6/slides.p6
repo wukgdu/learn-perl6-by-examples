@@ -40,7 +40,7 @@ for @cities -> $city {
 # Iterate over the keys and values of a hash
 my %distances =
 Bratislava => 1084,
-Stockholm  => 442; 
+Stockholm  => 442;
 for %distances.kv -> $city, $distance {
     say "$city is $distance km away";
 }
@@ -48,7 +48,7 @@ for %distances.kv -> $city, $distance {
 # Check if any of a list of test scores is a pass
 my @aa = 75, 47, 90, 22, 80;
 my @bb = 61, 77, 94, 82, 60;
-my @cc = 45, 59, 33, 11, 19; 
+my @cc = 45, 59, 33, 11, 19;
 if any(@aa) >= 60 { say "Some passes in A" }
 if any(@bb) >= 60 { say "Some passes in B" }
 if any(@cc) >= 60 { say "Some passes in C" }
@@ -56,7 +56,7 @@ if any(@cc) >= 60 { say "Some passes in C" }
 # Check if all of a list of test scores are passes
 my @a1 = 75, 47, 90, 22, 80;
 my @b1 = 61, 77, 94, 82, 60;
-my @c1 = 45, 59, 33, 11, 19; 
+my @c1 = 45, 59, 33, 11, 19;
 if all(@a1) >= 60 { say "All passes in A" }
 if all(@b1) >= 60 { say "All passes in B" }
 if all(@c1) >= 60 { say "All passes in C" }
@@ -64,7 +64,7 @@ if all(@c1) >= 60 { say "All passes in C" }
 # Check if none of a list of test scores is a pass
 my @a2 = 75, 47, 90, 22, 80;
 my @b2 = 61, 77, 94, 82, 60;
-my @c2 = 45, 59, 33, 11, 19; 
+my @c2 = 45, 59, 33, 11, 19;
 if none(@a2) >= 60 { say "No passes in A" }
 if none(@b2) >= 60 { say "No passes in B" }
 if none(@c2) >= 60 { say "No passes in C" }
@@ -125,9 +125,9 @@ class Product {
     has $.name;  # Attr + accessor
     has $.price;
     has $.discount is rw;
-                 # Attr + lvalue accessor  
+                 # Attr + lvalue accessor
     method get_price {
-        return $.price - $!discount;
+        return $.price - ($!discount // 0);
     }
 }
 
@@ -195,4 +195,4 @@ say win(Stone, Scissor);
 
 #Draw
 #Lose
-#Win 
+#Win

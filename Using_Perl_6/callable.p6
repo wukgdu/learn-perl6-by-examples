@@ -1,6 +1,6 @@
 ﻿use v6;
 
-&function = sub { 
+my &function = sub { 
 say 'hello';
 };         # store subroutine in callable namespace
 function();                      # call/run it

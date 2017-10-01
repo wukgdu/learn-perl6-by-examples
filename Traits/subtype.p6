@@ -2,7 +2,7 @@ sub divide(Int $a,
            Int $b where { $^n != 0 }) {
     return $a / $b;
 }
-say divide(120, 3); # 42
+say divide(120, 3); # 40
 # say divide(100, 0); # Type check failure
 
 # Here is an example of using subtypes to distinguish between two candidates

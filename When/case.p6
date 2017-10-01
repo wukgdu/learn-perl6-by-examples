@@ -19,7 +19,7 @@ given (4, 5) {
 }
 
 given ("fly.mp3", 34, "It's funny") {
-    when (/.mp3$/, /4$/, *.chars > 4) {say "Perfact"}
+    when (/.mp3$/, /4$/, *.chars > 4) {say "Perfect"}
 }
 
 given 5 {
