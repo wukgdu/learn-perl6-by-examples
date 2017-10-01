@@ -25,8 +25,8 @@ grammar URL {
             <[ a..z A..Z 0..9 \-_.!~*'():@&=+$,/ ]>+
         }
     }
- 
+
 my  $match = URL.parse('http://perl6.org/documentation/');
 say $match.WHAT();
-say $match<path>;       # perl6.org
+say $match<path>;       # documentation/
 say "hello ";

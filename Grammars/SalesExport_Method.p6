@@ -7,13 +7,13 @@ grammar SalesExport::Grammar {
         <cname=.name> \n
         <destination>+
     }
-	
+
     token destination {
         \s+ <dname=.name> \s+ ':' \s+
         <lat=.num> ',' <long=.num> \s+ ':' \s+
         <sales=.integer> \n
     }
-	
+
     token name    { \w+          }
     token num     { \d+ [\.\d+]? }
     token integer { \d+          }
@@ -30,14 +30,14 @@ Switzerland
 THE END
 
 class SalesExport::Grammar::Actions {
-	method destination($/) { make ~$<dname> => [$<sales>.map(*.Num+10),$<lat>.map(*.Num+90) ]         }
+	method destination($/) { make ~$<dname> => [$<sales>.Num+10, $<lat>.Num+90] }
     method country($/)     { make ~$<cname> => $<destination>>>.made            }
     method TOP($/)         { make $<country>>>.made                             }
 }
 
 my $actions = SalesExport::Grammar::Actions.new;
 my $grammar_action = SalesExport::Grammar.parse($string, :actions($actions)).made;
-#say $grammar_action.Str;
+# say $grammar_action.Str;
 # 获取所有国家的名字
 for @$grammar_action -> $p {
     say "$p.key()";
@@ -46,7 +46,7 @@ say '-' x 45;
 # 获取所有目的地
 for @$grammar_action -> $p {
     for $p.value() -> $d {
-	    for @$d -> $n{
+	    for @$d -> $n {
 		    say $n.key();
 		}
 	}
@@ -55,20 +55,20 @@ say '-' x 45;
 # 获取出售的票数
 for @$grammar_action -> $p {
     print "$p.key()\t";
+    my $count=0;
     for $p.value() -> $d {
-	    my $count;
-	    for @$d -> $n{
+	    for @$d -> $n {
 		    $count += $n.value()[0];
 		}
-	say $count;
 	}
+	say $count;
 }
 
 say '-' x 45;
 # 获取经度 lat
 for @$grammar_action -> $p {
     for $p.value() -> $d {
-	    for @$d -> $n{
+	    for @$d -> $n {
 		    say $n.value()[1];
 		}
 	}

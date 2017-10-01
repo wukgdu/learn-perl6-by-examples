@@ -3,15 +3,15 @@
     token variable {
         <sigil> <name>
     }
-	
+
     token sigil {
         '$' | '@' | '&' | '%' | '::'
     }
-	
+
 	# [ ... ] are non-capturing groups
 	token name {
-        <identifier> 
-        [ '::' <identifier> ] * 
+        <identifier>
+        [ '::' <identifier> ] *
     }
 	# 标识符以字母开头
     token identifier {
@@ -24,7 +24,7 @@ say $match;
 
 # we inherit from the original grammar...
 grammar VARIABLENAMES is VariableNames {
-    
+
     # ... and override that parsing rule that we want to change
     token identifier {
         # char classes are <[ ... ]> in Perl 6

@@ -4,7 +4,7 @@ grammar KeyValuePairs {
     token TOP {
         [<pair>]*
     }
-    
+
     token pair {
         <key=.identifier>  \s* '=' \s*  <value=.identifier> \v*
     }

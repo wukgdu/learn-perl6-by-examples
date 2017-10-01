@@ -1,16 +1,16 @@
 ﻿use v6;
 
 grammar KeyValuePairs {
-    token TOP { 
+    token TOP {
 	    [ <pair> \n+ ]*
 	}
-	
+
 	token ws { \h* }
-	
+
 	rule pair {
 	    <key=.identifier> '=' <value=.identifier>
 	}
-	
+
 	token identifier { \w+ }
 }
 
@@ -19,7 +19,7 @@ class KeyValuePairsActions {
 	method pair      ($/)  { make ~$<key> => ~$<value>  }
 	method TOP       ($/)  { make $<pair>>>.made        }
 }
-	
+
 my $string = q:to/EOI/;
 second=b
 hits=42

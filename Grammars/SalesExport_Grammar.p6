@@ -7,13 +7,13 @@ grammar SalesExport::Grammar {
         <cname=.name> \n
         <destination>+
     }
-	
+
     token destination {
         \s+ <dname=.name> \s+ ':' \s+
         <lat=.num> ',' <long=.num> \s+ ':' \s+
         <sales=.integer> \n
     }
-	
+
     token name    { \w+          }
     token num     { \d+ [\.\d+]? }
     token integer { \d+          }
@@ -30,7 +30,7 @@ Switzerland
 THE END
 
 class SalesExport::Grammar::Actions {
-	method destination($/) { make ~$<dname> => $<sales>          }
+	method destination($/) { make ~$<dname> => $<sales>          } # not used
     method country($/)     { make ~$<cname> => $<destination>    }
     method TOP($/)         { make $<country>>>.made              }
 }
@@ -43,29 +43,25 @@ for @$grammar_action -> $p {
     say "$p.key()";
 }
 
-say  "-" x 45; 
+say  "-" x 45;
 for @$grammar_action -> $p {
     for $p.value() -> $d {
-	   for @$d -> $n {
-	      say ~$n<dname>; 
-	   }
-	  }
+        say $d<dname>;
+	}
 }
-  
-say  "-" x 45; 
+
+say  "-" x 45;
 
 # 计算每个国家卖了多少票
 for @$grammar_action -> $c {
+    my $sales_count=0;
     for $c.value() -> $d {
-	   my $sales_count=0;
-	   for @$d -> $n {
-	      $sales_count += ~$n<sales>; 
-	   }
-	   say $sales_count; 
-	  }
+	    $sales_count += $d<sales>;
+	}
+    say $sales_count;
 }
-    
- 
+
+
  #`(
 # say $string;
 my $grammar_object = SalesExport::Grammar.parse($string);
@@ -75,9 +71,9 @@ if $grammar_object {
      # TODO: error reporting
      say "Not quite works...";
  }
- 
- 
-# say $grammar_object; 
+
+
+# say $grammar_object;
 #  say $grammar_object<country>.Str;
 say "_" x 45;
 # say $grammar_object<country>[0];
