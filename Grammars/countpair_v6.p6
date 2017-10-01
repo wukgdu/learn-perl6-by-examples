@@ -1,6 +1,6 @@
 ﻿use v6;
 
-my $file=open "test.txt", :r;
+my $file=open "wordpairs.txt", :r;
 
 my %dict;
 my $line;

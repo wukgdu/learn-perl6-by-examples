@@ -1,7 +1,8 @@
 use v6;
 
 BEGIN {
-    @*INC.push('/Volumes/WORK/1-Books/3-Perl6/examples/笔记/Grammars');
+    # @*INC.push('/Volumes/WORK/1-Books/3-Perl6/examples/笔记/Grammars');
+    use lib '.';
 }
 use Add2;
 
@@ -17,7 +18,7 @@ my @experssions = (
 for @experssions -> $exp {
     print $exp, " ";
     my $result = Add2.parse($exp);
-    say $result ?? 'OK' !! 'NOT OK'; 
+    say $result ?? 'OK' !! 'NOT OK';
     CATCH {
         say "exception received: $!";
     }

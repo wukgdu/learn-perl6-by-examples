@@ -26,8 +26,8 @@ say "Valid CSV file!" if CSV.parse( q:to/EOCSV/ );
     1997,Ford,E350,2.34
     2000,Mercury,Cougar,2.38
     EOCSV
-	
-say CSV.parse( q:to/EOCSV/, 'line', :$actions );
+
+say CSV.parse( q:to/EOCSV/, rule=>'line');
     Year,Make,Model,Length
     1997,Ford,E350,2.34
     2000,Mercury,Cougar,2.38

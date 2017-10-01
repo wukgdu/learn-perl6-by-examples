@@ -1,7 +1,8 @@
 use v6;
 
 BEGIN {
-    @*INC.push('/Volumes/WORK/1-Books/3-Perl6/examples/笔记/Grammars');
+    # @*INC.push('/Volumes/WORK/1-Books/3-Perl6/examples/笔记/Grammars');
+    use lib '.';
 }
 use Add1;
 
