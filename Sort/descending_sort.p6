@@ -6,6 +6,6 @@ my %hash = 'Perl'=>80,
             "Php"=>80,
            "Java"=>85;
 
-for %hash.sort({-.value}).hash.keys -> $key {
-    say $key, "\t", %hash{"$key"}
+for %hash.sort({-.value}) -> (:$key, :$value) {
+    say $key, "\t", $value;
 }

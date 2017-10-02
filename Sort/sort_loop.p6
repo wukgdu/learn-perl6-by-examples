@@ -12,7 +12,7 @@ say "-" x 15;
 
 for %hash.sort -> $pair (:$key, :$value) {
   say $pair;
-  say $key === $pair.key and $value === $pair.value; # True␤
+  say $key === $pair.key && $value === $pair.value; # True␤
 }
 
 say "-" x 15;

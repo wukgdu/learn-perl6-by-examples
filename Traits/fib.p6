@@ -10,7 +10,7 @@ say fib(3);
 
 subset FirstName
     of Str
-  where 0 < *.chars && *.chars < 256; # a warn; don't know why; 2017.07
+  where { 0 < .chars && .chars < 256 };
 
 sub first_name(FirstName $name){
     say "$name";

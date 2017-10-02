@@ -1,14 +1,14 @@
 ﻿use v6;
 
 my @lines = slurp('3col.txt');
-for @lines -> $line {
+for @lines.lines -> $line {
    my @b = $line.comb(/\d+/);
    say "@b[]";
    say "-" x 45;
 }
 
 # 没有打印出满意的结果, 因为 slurp 是把所有文本作为一个字符串吸入的.
-
+# .lines 可以
 #`(
 my $fh = open('3col.txt');
 my $num;

@@ -4,7 +4,7 @@ my @a=<aa bb cc dd ee ff >;
 for @a -> $x,$y,$z {
     say $x,$y,$z;
 }
-say $*PROGRAM_NAME;
+say $*PROGRAM-NAME;
 say $*CWD;
 # aabbcc
 # ddeeff

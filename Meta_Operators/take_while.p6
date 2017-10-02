@@ -1,5 +1,5 @@
 use v6;
-use List::Utils;
+use List::Utils; # zef
 
 my @array = <1 3 4 6 7>;
 my @b = sliding-window(@array,2);
@@ -17,7 +17,7 @@ my @e = combinations(@array,4);
 .say for @e;
 
 say '-' x 15;
-my @take = take-while((1...*), * <= 10); 
+my @take = take-while((1...*), * <= 10);
 .say for @take;
 
 say '-' x 15;
