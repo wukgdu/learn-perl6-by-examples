@@ -34,7 +34,7 @@ grammar University {
     }
 
     token field {
-        <[A..Za..z0..9\s&]>+
+        <[A..Za..z0..9\s&]-[\n]>+
     }
 
     token myname {

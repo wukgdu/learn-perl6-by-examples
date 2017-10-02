@@ -1,3 +1,4 @@
 use v6;
 
-"a + b" ~~ /<item> {say ~$/}/;
+"a + b" ~~ /<alpha>' + '<alpha> {say ~$/}/;
+# "a + b" ~~ /<item> {say ~$/}/;

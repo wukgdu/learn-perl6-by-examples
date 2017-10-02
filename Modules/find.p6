@@ -1,10 +1,10 @@
 use v6;
-use Concurrent::File::Find;
+use Concurrent::File::Find; # zef
 
 find(%*ENV<HOME>
     , :extension('txt', {.contains('~')}) # ends in .txt or ends in something that contains a ~
     , :exclude('covers') # exclude any path that contains covers, both for files and directories
-    , :exclude-dir('.') # exclude any directory-path that contains a . 
+    , :exclude-dir('.') # exclude any directory-path that contains a .
     , :file # return file paths
     , :!directory # don't return directory paths
     , :symlink # return symlink paths
