@@ -21,6 +21,6 @@ class Rectangle is Shape does Paintable {
 
 Rectangle.new(width => 8, height => 3).paint;
 # 这打印下面 3 行
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
+# xxxxxxxx
+# xxxxxxxx
+# xxxxxxxx

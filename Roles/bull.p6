@@ -16,4 +16,4 @@ class Taurus does Bull-Like does Steerable {
     method steer ($!direction?) {
         self.Steerable::steer($!direction?);
     }
- }
+}

@@ -1,3 +1,4 @@
+use MONKEY-SEE-NO-EVAL;
 role Serializable {
     method serialize() {
         self.perl; # very primitive serialization
