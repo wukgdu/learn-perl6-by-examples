@@ -19,7 +19,7 @@ sub MAIN(Str :r(:$regex), Str :s(:$substr), Str :e(:$ext) = '.out', Int :i(:$ign
 
 # 查看本脚本的用法
 # perl6 colon_in_signature.p6 --help
-                                                                       
+                                                                      
 # Usage:
 #  colon_in_signature.p6 [-r|--regex=<Str>] [-s|--substr=<Str>] [-e|--ext=<Str>] [-i|--ignore-line=<Int>] [<files> ...]
 

@@ -10,7 +10,7 @@ multi quicksort([$pivot, *@rest]) {
     my @before = @rest.grep(* < $pivot);
     my @after  = @rest.grep(* >= $pivot);
     # Sort the partitions.
-    (quicksort(@before), $pivot, quicksort(@after))
+    flat (quicksort(@before), $pivot, quicksort(@after))
 }
 
 my @unsorted = <13 1 9 12 4 2015>;
