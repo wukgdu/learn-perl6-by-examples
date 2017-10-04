@@ -6,8 +6,7 @@ use v6;
 
 my @bottles_of_beer
     = map {join "", "$_ bottle", $_ ne 1 && 's' || '', " of beer"},   # Remove comma for Perl 5
-            'No more', 1..99;
-
+            'No more', Slip(1..99);
 my $n = 99;
 while ($n > 0) {
     say "@bottles_of_beer[$n] on the wall,\n",

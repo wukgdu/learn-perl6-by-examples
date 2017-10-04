@@ -2,12 +2,14 @@
 use v6;
 
 sub merge (@a, @b) {
+    flat (
     gather while @a && @b {
         if @a[0] before @b[0] { take @a.shift }
         else                  { take @b.shift }
     },
     @a,
-    @b;
+    @b
+    )
 }
 
 sub mergesort ( @list ) {

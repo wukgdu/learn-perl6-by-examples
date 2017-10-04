@@ -6,8 +6,8 @@ multi merge ([], @ys) { @ys }
 multi merge (@xs, []) { @xs }
 
 multi merge ([$x, *@xs], [$y, *@ys]) {
-    $x before $y ?? ($x, merge @xs, [$y, @ys])
-                 !! ($y, merge [$x, @xs], @ys)
+    $x before $y ?? ($x, (merge @xs, [$y, @ys])>>.list.flat.Slip)
+                 !! ($y, (merge [$x, @xs], @ys)>>.list.flat.Slip)
 }
 
 

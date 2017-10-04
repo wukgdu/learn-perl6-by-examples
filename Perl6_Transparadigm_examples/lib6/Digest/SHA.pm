@@ -9,8 +9,8 @@ sub init(&f) {
     map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int }, @primes
 }
 
-sub infix:<m+> { ($^a + $^b) % 2**32 }
-sub rotr($n, $b) { $n +> $b +| $n +< (32 - $b) }
+sub infix:<m+> { (($^a // 0) + ($^b // 0)) % 2**32 }
+sub rotr($n, $b) { $n +> ($b // 0) +| $n +< (32 - ($b // 0)) }
 
 multi sha256(Blob $data) is export {
 
@@ -33,19 +33,19 @@ multi sha256(Blob $data) is export {
             @w[$j-7],
             rotr(@w[$j-2], 17) +^ rotr(@w[$j-2], 19)  +^ @w[$j-2] +> 10,
             @w[$j-16];
-            my $ch = @h[4] +& @h[5] +^ +^@h[4] % 2**32 +& @h[6];
-            my $maj = @h[0] +& @h[2] +^ @h[0] +& @h[1] +^ @h[1] +& @h[2];
+            my $ch = (@h[4] +& @h[5]) +^ (@h[4] % 2**32 +& @h[6]);
+            my $maj = (@h[0] +& @h[2]) +^ (@h[0] +& @h[1]) +^ (@h[1] +& @h[2]);
             my $s0 = [+^] map { rotr @h[0], $_ }, 2, 13, 22;
             my $s1 = [+^] map { rotr @h[4], $_ }, 6, 11, 25;
             my $t1 = [m+] @h[7], $s1, $ch, K[$j], @w[$j];
             my $t2 = $s0 m+ $maj;
-            @h = $t1 m+ $t2, @h[^3], @h[3] m+ $t1, @h[4..6];
+            @h = ($t1 m+ $t2, @h[^3], @h[3] m+ $t1, @h[4..6]).flat;
         }
         @H = @H Z[m+] @h;
     }
 
     return Blob.new( map -> $word is rw {
-        reverse gather for ^4 { take $word % 256; $word div= 256 }
+        | reverse gather for ^4 { take $word % 256; $word div= 256 }
     }, @H);
 }
 

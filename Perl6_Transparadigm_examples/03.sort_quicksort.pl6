@@ -13,9 +13,11 @@ sub quicksort( *@list ) {
         else                   { @after.push($elem);  }
     }
 
-    return quicksort(@before),
-           $pivot,
-           quicksort(@after);
+    return flat(
+               quicksort(@before),
+               $pivot,
+               quicksort(@after)
+           );
 }
 
 #my @data = 6, 7, 2, 1, 8, 9, 5, 3, 4;
@@ -23,22 +25,3 @@ my @data = < p e r l s i x >;
 
 say "input  = {           @data  }";
 say "output = { quicksort(@data) }";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

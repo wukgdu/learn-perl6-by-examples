@@ -1,16 +1,18 @@
 #! /usr/bin/env perl6
 use v6;
 
-multi quicksort(  []  ) {    };
-multi quicksort(  Mu  ) {    };
+multi quicksort(  []  ) {  []  };
+multi quicksort(  Mu  ) {  []  };
 
 multi quicksort( [$x] ) { $x };
 
 multi quicksort( [$pivot, *@xs] ) {
     given @xs.classify:{ $^elem before $pivot ?? 'pre' !! 'post'} {
-        quicksort( .<pre>  ),
-        $pivot,
-        quicksort( .<post> );
+        flat (
+            quicksort( .<pre>  ),
+            $pivot,
+            quicksort( .<post> )
+        )
     }
 }
 
