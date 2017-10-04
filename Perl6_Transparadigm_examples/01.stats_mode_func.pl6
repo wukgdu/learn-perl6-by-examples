@@ -24,7 +24,7 @@ sub mode (*@list) {
     sub max_freq    { frequencies.values.max                }
     sub max_vals    { list_elems.grep: {.value == max_freq} }
 
-    return max_vals».keys;
+    return max_vals».key;
 }
 
 sub median (*@list) {
@@ -33,5 +33,3 @@ sub median (*@list) {
                 ?? mean_a(sorted.[*/2, */2-1])
                 !!        sorted.[*/2]
 }
-
-

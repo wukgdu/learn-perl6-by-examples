@@ -10,7 +10,7 @@ sub merge (@a, @b) {
     @b;
 }
 
-sub mergesort ( *@list ) {
+sub mergesort ( @list ) {
     return @list if @list.elems <= 1;
 
     my $middle = @list.elems div 2;

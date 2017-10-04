@@ -5,7 +5,7 @@ sub show ($text) {
     say '';
     say ('____/ ' ~ $text ~ ' \_________________________________________________').substr(0,50);
 }
-
+use lib 'lib6';
 use Bank;
 
 my Bank $bank .= new(:ID('123-456-789'), :name('Bank of Evil'));

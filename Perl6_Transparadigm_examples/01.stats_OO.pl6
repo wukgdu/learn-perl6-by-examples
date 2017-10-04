@@ -25,7 +25,7 @@ class StatList is List {
         sub max_freq    { frequencies.values.max                }
         sub max_vals    { list_elems.grep: {.value == max_freq} }
 
-        return  max_vals».keys;
+        return  max_vals».key;
     }
 }
 
@@ -35,4 +35,3 @@ say $list.mean_a;
 say $list.mean_g;
 say $list.median;
 say $list.mode;
-

@@ -1,6 +1,6 @@
 #! /usr/bin/env perl6
 use v6;
-
+use lib 'lib6';
 use Bank;
 
 my Bank $bank .= new(:ID('123-456-789'));

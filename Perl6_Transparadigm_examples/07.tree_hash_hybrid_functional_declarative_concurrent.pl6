@@ -1,6 +1,6 @@
 #! /usr/bin/env perl6
 use v6;
-
+use lib 'lib6';
 say tree_hash('123456789' x 1_000).list>>.fmt("%02x").join;
 
 
@@ -32,5 +32,3 @@ multi build_tree ([$node]) {
 }
 
 use Digest::SHA;
-
-

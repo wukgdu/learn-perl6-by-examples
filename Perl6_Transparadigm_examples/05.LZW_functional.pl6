@@ -23,7 +23,7 @@ multi encode([$next, *@uncompressed], :%code, :$seen)  {
          # Else emit encoding for the already-seen sequence
         !! ( %code{$seen},
              # Plus the encoding for the rest of the string...
-             encode( @uncompressed,
+             |encode( @uncompressed,
                      # Add encoding for new sequence to table
                      code => %( %code, $seen~$next => %code.elems ),
                      # Continue encoding from next character
@@ -57,5 +57,3 @@ separator;
 
 
 sub separator { say '_' x 50 }
-
-

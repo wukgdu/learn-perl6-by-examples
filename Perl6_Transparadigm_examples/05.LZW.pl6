@@ -1,7 +1,7 @@
 #! /usr/bin/env perl6
 use v6;
 
-sub compress(Str $uncompressed --> List)  {
+sub compress(Str $uncompressed)  {
     # Build a look-up table of encoded representations
     # (each ASCII char represented by its equivalent codepoint)
     my %code_for = map { $^ASCII.chr => $^ASCII }, ^256;
@@ -59,4 +59,3 @@ separator;
 
 
 sub separator { say '_' x 50 }
-

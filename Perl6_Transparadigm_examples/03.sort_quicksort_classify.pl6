@@ -19,23 +19,3 @@ my @data = < p e r l s i x >;
 
 say "input  = {           @data  }";
 say "output = { quicksort(@data) }";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

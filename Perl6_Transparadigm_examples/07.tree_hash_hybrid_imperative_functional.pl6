@@ -1,6 +1,6 @@
 #! /usr/bin/env perl6
 use v6;
-
+use lib 'lib6';
 say tree_hash('123456789' x 1_000).list>>.fmt("%02x").join;
 
 
@@ -27,7 +27,7 @@ sub tree_hash (Str $data, Int $chunk_size = MB) {
 }
 
 # Iteratively boil the chunks down to one...
-sub build_tree (@nodes is rw) {
+sub build_tree (@nodes) {
 
     # While not yet sufficiently boiled down...
     while @nodes > 1 {
@@ -49,5 +49,3 @@ sub build_tree (@nodes is rw) {
 }
 
 use Digest::SHA;
-
-

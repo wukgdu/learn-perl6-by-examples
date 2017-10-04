@@ -25,22 +25,22 @@ sub invalid_ID   ($rec) { "Bad ID:   $rec" if $rec<ID>   !~~ /^\d ** 8$/; }
 
 say 'Validating...';
 my @invalidations = (
-    @records».&invalid_name,
-    @records».&invalid_age,
-    @records».&invalid_ID,
+    @records.map(*.&invalid_name),
+    @records.map(*.&invalid_age),
+    @records.map(*.&invalid_ID),
 );
 
 @invalidations».&report;
 
 say 'Normalizing...';
-@records».&normalize_data;
+@records.map(*.&normalize_data);
 
 say 'Revalidating...';
 
 @invalidations = (
-    @records».&invalid_name,
-    @records».&invalid_age,
-    @records».&invalid_ID,
+    @records.map(*.&invalid_name),
+    @records.map(*.&invalid_age),
+    @records.map(*.&invalid_ID),
 );
 
 @invalidations».&report;

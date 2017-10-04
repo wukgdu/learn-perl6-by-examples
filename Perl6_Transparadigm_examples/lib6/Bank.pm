@@ -8,15 +8,15 @@ class Ident {
     has Str $.ID  where Pattern = '000-000-000';
 }
 
+constant GENERAL_TAX_RATE = 0.01;
 role Taxable [:$THRESHOLD = 100_000] {
-    constant GENERAL_TAX_RATE = 0.01;
 
     has %.tax_record;
 
     method tax_credits {...}
 
     method calculate_tax () {
-        my $tax_payable = ($.balance min $THRESHOLD) * GENERAL_TAX_RATE 
+        my $tax_payable = ($.balance min $THRESHOLD) * GENERAL_TAX_RATE
                           - $.tax_credits;
 
         %!tax_record{now} = $tax_payable;

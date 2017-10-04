@@ -2,10 +2,10 @@
 use v6;
 
 sub is_prime(Int $n) {
-    return $n % all(2..$n.sqrt+1);
+    return $n % all(2..$n.sqrt);
 }
 
 
-for 1..1001 -> $n {
+for 2..1001 -> $n {
     say "$n is prime" if is_prime($n);
 }

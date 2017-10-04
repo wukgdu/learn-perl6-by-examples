@@ -29,5 +29,3 @@ multi mergesort (@xs)  {
 
 say "input  = {           @data  }";
 say "output = { mergesort(@data) }";
-
-

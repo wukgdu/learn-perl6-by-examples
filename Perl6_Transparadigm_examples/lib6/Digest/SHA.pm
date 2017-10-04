@@ -1,12 +1,12 @@
 #! /usr/bin/env perl6
 use v6;
 
-module Digest::SHA;
+unit module Digest::SHA;
 
-constant primes = grep &is-prime, 2 .. *;
+constant @primes = grep &is-prime, 2 .. *;
 
 sub init(&f) {
-    map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int }, primes
+    map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int }, @primes
 }
 
 sub infix:<m+> { ($^a + $^b) % 2**32 }
@@ -52,5 +52,3 @@ multi sha256(Blob $data) is export {
 multi sha256(Str $text) is export {
     return sha256( $text.encode() ).list.join;
 }
-
-

@@ -6,14 +6,14 @@ say .list».fmt("%02x").join given sha256 "Perl 6 is awesome";
 sub sha256(Str $text --> Blob) {
 
     # Create modular-addition and bit-rotate-right operators
-    sub infix:«mod+» ($a, $b)     { ($a + $b) % 2**32 }
-    sub infix:«rot>» ($bits, $n)  { $n +> $bits +| $n +< (32 - $bits) }
+    sub infix:«mod+» ($a, $b)     { say "$a $b"; ($a + $b) % 2**32 }
+    sub infix:«rot>» ($bits, $n)  { $n +> ($bits // 0) +| $n +< (32 - ($bits // 0)) }
 
     # Map a function g() of f() over an infinite list of primes
     sub init(&f) {
-        constant primes = grep &is-prime, 2 .. *;
+        constant @primes = grep &is-prime, 2 .. *;
         map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int },
-            primes
+            @primes
     }
     constant K = init( { $^n ** (1/3) })[^8];
 
@@ -55,7 +55,7 @@ sub sha256(Str $text --> Blob) {
           my $t1  = [mod+] @h[7], $S1, $ch, K[$j], @w[$j];
           my $t2  = $S0 mod+ $maj;
 
-          @h      = $t1 mod+ $t2, @h[^3], @h[3] mod+ $t1, @h[4..6];
+          @h      = ($t1 mod+ $t2, @h[^3], @h[3] mod+ $t1, @h[4..6]).flat;
        }
 
        @H = @H Z[mod+] @h;
@@ -63,8 +63,6 @@ sub sha256(Str $text --> Blob) {
 
     # Convert the hash string back to a list of 8-bit bytes
     return Blob.new: map -> $word is rw {
-        reverse gather for ^4 { take $word % 256; $word div= 256 }
+        | reverse gather for ^4 { take $word % 256; $word div= 256 }
     }, @H;
 }
-
-
