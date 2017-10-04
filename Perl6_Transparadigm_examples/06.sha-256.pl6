@@ -6,8 +6,8 @@ say .list».fmt("%02x").join given sha256 "Perl 6 is awesome";
 sub sha256(Str $text --> Blob) {
 
     # Create modular-addition and bit-rotate-right operators
-    sub infix:«mod+» ($a, $b)     { (($a // 0) + ($b // 0)) % 2**32 }
-    sub infix:«rot>» ($bits, $n)  { $n +> ($bits // 0) +| $n +< (32 - ($bits // 0)) }
+    sub infix:«mod+» ($a, $b)     { ($a  + $b) % 2**32 }
+    multi infix:«rot>» ($n, $bits)  { $n +> $bits +| $n +< (32 - $bits) }
 
     # Map a function g() of f() over an infinite list of primes
     sub init(&f) {
@@ -15,7 +15,7 @@ sub sha256(Str $text --> Blob) {
         map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int },
             @primes
     }
-    constant @K = init( { $^n ** (1/3) })[^8];
+    constant @K = init( { $^n ** (1/3) })[^64];
 
     # Convert the input text to a Big List Of Bytes
     my Blob $data = $text.encode();
@@ -26,7 +26,7 @@ sub sha256(Str $text --> Blob) {
 
     # Extend the byte list to the appropriate width, adding salt
     push @b, 0x80; push @b, 0 until (8*@b-448) %% 512;
-    push @b, reverse gather for ^8 { take $l%256; $l div=256 }
+    push @b, | reverse gather for ^8 { take $l%256; $l div=256 }
 
     # Create an initial hash string (in base-256)
     my @word = :256[@b.shift xx 4] xx @b/4;
@@ -42,13 +42,13 @@ sub sha256(Str $text --> Blob) {
           @w[$j] = $j < 16
               ??  @word[$j + $i] // 0
               !!  [mod+] (@w[$j-15] rot> 7) +^ (@w[$j-15] rot> 18)
-                         +^ @w[$j-15] +> 3,
+                         +^ (@w[$j-15] +> 3),
                   @w[$j-7],
                   (@w[$j-2] rot> 17) +^ (@w[$j-2] rot> 19)
-                         +^ @w[$j-2] +> 10,
+                         +^ (@w[$j-2] +> 10),
                   @w[$j-16];
 
-          my $ch  = (@h[4] +& @h[5]) +^ (@h[4] % 2**32 +& @h[6]);
+          my $ch  = (@h[4] +& @h[5]) +^ +^ @h[4] % 2**32 +& @h[6];
           my $maj = (@h[0] +& @h[2]) +^ (@h[0] +& @h[1]) +^ (@h[1] +& @h[2]);
           my $S0  = [+^] map { @h[0] rot> $^n }, 2, 13, 22;
           my $S1  = [+^] map { @h[4] rot> $^n }, 6, 11, 25;

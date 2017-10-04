@@ -1,7 +1,5 @@
-#! /usr/bin/env perl6
-use v6;
-
-unit module Digest::SHA;
+# http://rosettacode.org/wiki/SHA-256#Perl_6
+say (sha256 "Perl 6 is awesome").list».fmt("%02x").join;
 
 sub init(&f) {
     map { my $f = $^p.&f; (($f - $f.Int)*2**32).Int },
@@ -45,8 +43,4 @@ multi sha256(Blob $data) {
         @H [Z[m+]]= @h;
     }
     return Blob.new: map { |reverse .polymod(256 xx 3) }, @H;
-}
-
-multi sha256(Str $text) is export {
-    return sha256( $text.encode() ).list.join;
 }
