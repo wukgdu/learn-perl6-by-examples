@@ -33,17 +33,17 @@ multi grep($matcher, Observable $ob) {
             }
         }
     }
+    say 1;
     $ob.subscribe(GrepSubscriber.new(:$matcher))
 }
 # don't know how to run
-my $src = ReadLineSource.new(fh => $*IN);
-$src
-    ==> grep(/^\d+$/)
-    ==> into my $nums;
+my Observable $src = ReadLineSource.new(fh => $*IN);
+my $nums = grep(/^\d+$/, $src);
+say $nums;
 
 $nums
     ==> grep(*.Int.is-prime)
-    ==> call(-> $p { say "That's prime!" });
+    ==> say "That's prime!";
 
 $nums
     ==> map(-> $n {
@@ -51,4 +51,4 @@ $nums
             $total >= 100 ?? 'More than 100' !! ()
         })
     ==> first()
-    ==> call(-> $msg { say $msg });
+    ==> say(); 
