@@ -5,3 +5,5 @@ say 5!;
 
 constant fact = 1, |[\*] 1..*;
 say fact[5];
+constant @fact = 1, ([\*] 1..*).Slip;
+say @fact[5];
