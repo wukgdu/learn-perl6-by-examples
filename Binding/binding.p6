@@ -1,12 +1,13 @@
 use v6;
 
+# := and ::= cannot be found in p6doc
 my $original = 5;say $original;
 my $mirror;
 $original := $mirror;       # normal binding, done on runtime
 
 say $mirror;
 
-$original ::= $mirror;      # same thing, but done during compile time
+$original := $mirror;      # same thing, but done during compile time
 # ::= Read-only binding operator.
 # "::=" not yet implemented. Sorry. # Rakudo Star 2017.07
 

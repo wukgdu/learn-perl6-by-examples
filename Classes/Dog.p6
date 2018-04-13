@@ -12,4 +12,11 @@ my $pet = Dog.new(
 $pet.kugo();
 $pet.name = 'Fido'; # OK
 $pet.kugo();
-$pet.color = 'White'; # Fails
+try {
+    CATCH {
+        default {
+            say .^name;
+        }
+    }
+    $pet.color = 'White'; # Fails
+}
